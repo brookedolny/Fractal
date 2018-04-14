@@ -67,14 +67,14 @@ public class JuliaSetColouring {
      */
     public Color colourPixel(double real, double imaginary, int iterations) {
         // TODO try to make this colour transition smoother
-        double ratio = julia.iterate(real, imaginary, iterations);
+        double ratio = julia.iterate(new Complex(real, imaginary), iterations);
         if (julia.order() == 2) {
             if (ratio == 0) {
                 return new Color(0,0,0);
             } else {
                 //return nonLinearInterpolationColor(ratio);
                 //return linearInterpolateColor(ratio, ratio % 1);
-                return linearInterpolateColor(ratio, ratio / julia.getIterations());
+                return linearInterpolateColor(ratio, ratio % 1);
             }
         } else {
             if (ratio == 0) {

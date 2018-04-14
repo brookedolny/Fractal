@@ -38,11 +38,6 @@ public class MandelbrotSetColouring {
      */
     public MandelbrotSetColouring(Fractal fractal) {
         this.fractal = fractal;
-        if (fractal.order() != 2) {
-            for (int i = 1; i < coloursBW.length; i++) {
-                coloursBW[i] = coloursBW[i - 1] + 1;
-            }
-        }
     }
 
     /**
@@ -91,7 +86,7 @@ public class MandelbrotSetColouring {
      */
     public Color colourPixel(double real, double imaginary, int iterations) {
         // TODO try to make this colour transition smoother
-        double ratio = fractal.iterate(real, imaginary, iterations);
+        double ratio = fractal.iterate(new Complex(real, imaginary), iterations);
         if (fractal.order() == 2) {
             if (ratio == 0) {
                 return new Color(0,0,0);

@@ -7,14 +7,14 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class MandelbrotSetImage {
     private int iterations;
-    private int order;
+    private double order;
     private final double resolution;
     private double scale;
     private BufferedImage img;
     private final Graphics2D g2;
     private MandelbrotSetColouring colouring;
 
-    public MandelbrotSetImage(int resolution, int iterations, int order, double scale) {
+    public MandelbrotSetImage(int resolution, int iterations, double order, double scale) {
         this.iterations = iterations;
         this.order = order;
         this.resolution = resolution;
@@ -29,25 +29,22 @@ public class MandelbrotSetImage {
      * Draws the MandelbrotSetImage to a {@code 2D Graphics} object.
      */
     public void drawImage() {
-        AtomicInteger jobCount = new AtomicInteger((int)resolution*(int)resolution);
+        AtomicInteger jobCount = new AtomicInteger((int)resolution);
         ExecutorService service = Executors.newFixedThreadPool(4);
         for (int x = 0; x < resolution; x++){
-            for (int y = 0; y < resolution; y++) {
-                final int x1 = x;
-                final int y1 = y;
-                service.submit( () -> {
-                        Color c = colouring.colourPixel((x1 - resolution / 2) / (resolution) * scale, (resolution / 2 - y1) / (resolution) * scale, iterations);
+            final int x1 = x;
+            service.submit(
+                () -> {
+                    for (int y = 0; y < resolution; y++) {
+                        Color c = colouring.colourPixel((x1 - resolution / 2) / (resolution) * scale, (resolution / 2 - y) / (resolution) * scale, iterations);
                         synchronized(g2) {
                             g2.setColor(c);
-                            g2.drawRect(x1, y1, 1, 1);
+                            g2.drawRect(x1, y, 1, 1);
                         }
-                        jobCount.decrementAndGet();
-                   }
-                );
-                // g2.setColor(colouring.colourPixel((x - resolution / 2) / (resolution) * scale, (resolution / 2 - y) / (resolution) * scale, iterations));
-                // g2.drawRect(x, y, 1, 1);
-            }
-            System.out.println("Report - Jobs remaining: " + jobCount.get());
+                    }
+                    jobCount.decrementAndGet();
+                }
+            );
         }
         service.shutdown();
         do {
@@ -65,7 +62,7 @@ public class MandelbrotSetImage {
      */
     public void saveImage() {
         try {
-            if (ImageIO.write(img, "png", new File("./MandelbrotSetImage.png"))) {
+            if (ImageIO.write(img, "png", new File("./MandelbrotSetImage" + order + ".png"))) {
                 System.out.println("image saved");
             }
         } catch (IOException e) {

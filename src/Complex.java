@@ -20,6 +20,18 @@ public class Complex {
         return this;
     }
 
+    public Complex pow(double power) {
+        double radius = Math.pow(magnitudeSquared(), power / 2);
+        double angle = (Math.atan2(imaginary, real)) * power;
+        real = radius * Math.cos(angle);
+        imaginary = radius * Math.sin(angle);
+        return this;
+    }
+
+    public double getReal() { return real; }
+
+    public double getImaginary() { return imaginary; }
+
     public double magnitude() {
         return Math.sqrt(real * real + imaginary * imaginary);
     }

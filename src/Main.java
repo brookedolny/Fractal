@@ -22,7 +22,12 @@ public class Main {
 
 
 //        JuliaSetImage image = new JuliaSetImage(0, -0.8, 5000, 1000, 2, 4);
-        MandelbrotSetImage image = new MandelbrotSetImage( 1000, 1000, 6, 4);
+//        MandelbrotSetImage image = new MandelbrotSetImage( 2000, 1000, -0.5, 4);
+//        image.drawImage();
+//        System.out.println("time to draw image: " + (System.currentTimeMillis() - time));
+//        image.saveImage();
+
+        JuliaSetImage image = new JuliaSetImage( 0, -0.8, 10000, 1000, 2.9, 4);
         image.drawImage();
         System.out.println("time to draw image: " + (System.currentTimeMillis() - time));
         image.saveImage();
