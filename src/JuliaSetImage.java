@@ -34,17 +34,24 @@ public class JuliaSetImage {
 
 
     /**
-     * Draws the MandelbrotSetImage to a {@code 2D Graphics} object.
+     * Draws the JuliaSetImage to a {@code 2D Graphics} object.
      */
     public void drawImage() {
         AtomicInteger jobCount = new AtomicInteger((int)resolution);
         ExecutorService service = Executors.newFixedThreadPool(4);
+        g2.setColor(Color.BLACK);
+        g2.fillRect(0,0, (int) resolution, (int) resolution);
+
         for (int x = 0; x < resolution; x++) {
             final int x1 = x;
             service.submit(
                 () -> {
                     for (int y = 0; y < resolution; y++) {
                         Color c = colouring.colourPixel((x1 - resolution / 2) / (resolution) * scale, (resolution / 2 - y) / (resolution) * scale, iterations);
+
+                        if(c.equals(Color.BLACK)) {
+                            continue;
+                        }
                         synchronized (g2) {
                             g2.setColor(c);
                             g2.drawRect(x1, y, 1, 1);

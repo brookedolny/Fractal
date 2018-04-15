@@ -34,7 +34,7 @@ public class Fractal {
 
     private double ratio(Complex c, int iterations, int maxIterations) {
         if (iterations < maxIterations) {
-            return (1 + iterations - Math.log(Math.log(c.magnitudeSquared()) / 2) / Math.log(order));
+            return (1 + iterations - Math.log(Math.log(c.magnitudeSquared()) / (2 * Math.log(2))) / Math.log(order));
         }
         return 0;
     }
