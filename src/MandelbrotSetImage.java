@@ -49,7 +49,7 @@ public class MandelbrotSetImage {
         service.shutdown();
         do {
             try {
-                service.awaitTermination(20, TimeUnit.SECONDS);
+                service.awaitTermination(30, TimeUnit.SECONDS);
                 System.out.println("Jobs remaining: " + jobCount.get());
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -60,9 +60,9 @@ public class MandelbrotSetImage {
     /**
      * Saves the MandelbrotSetImage as a png file
      */
-    public void saveImage() {
+    public void saveImage(String folder) {
         try {
-            if (ImageIO.write(img, "png", new File("./MandelbrotSetImage" + order + ".png"))) {
+            if (ImageIO.write(img, "png", new File(folder+"/MandelbrotSetImage" + Math.round(order*100) + ".png"))) {
                 System.out.println("image saved");
             }
         } catch (IOException e) {

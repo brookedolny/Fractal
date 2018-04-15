@@ -57,7 +57,7 @@ public class JuliaSetImage {
         service.shutdown();
         do {
             try {
-                service.awaitTermination(20, TimeUnit.SECONDS);
+                service.awaitTermination(30, TimeUnit.SECONDS);
                 System.out.println("Jobs remaining: " + jobCount.get());
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -68,9 +68,9 @@ public class JuliaSetImage {
     /**
      * Saves the MandelbrotSetImage as a png file
      */
-    public void saveImage() {
+    public void saveImage(String folder) {
         try {
-            if (ImageIO.write(img, "png", new File("./JuliaSetImage_"+real+"+"+imaginary+"i"+"order"+order+".png"))) {
+            if (ImageIO.write(img, "png", new File(folder+"/JuliaSetImage_"+real+"+"+imaginary+"i_order_"+Math.round(order*100)+".png"))) {
                 System.out.println("image saved");
             }
         } catch (IOException e) {
