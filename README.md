@@ -3,7 +3,7 @@ This project draws Mandelbrot and Julia Sets of non-negative order.
 
 ## Mandelbrot Sets
 The Mandelbrot Set is a set of complex numbers `c` that, when iterated through the function `f(z) = z^2 + c`, remain bounded.
-For example, `c = 1` is not in the Mandelbrot Set, since:
+Consider, `c = 1`:
 ```
 f(0) = 0^2 + 1 = 1
 f(1) = 1^2 + 1 = 2
@@ -11,15 +11,15 @@ f(2) = 2^2 + 1 = 5
 f(5) = 5^2 + 1 = 26
 ...
 ```
-which clearly goes to infinity as the values of `z` continue to be iterated through this function.
-Also, `c = -1` is in the Mandelbrot set, since:
+Observe that this goes to infinity as `z` continues to be iterated through this function.
+On the other hand, if we were to use `c = -1`:
 ```
 f(0)  =  (0)^2 - 1 = -1
 f(-1) = (-1)^2 - 1 = 0
 f(0)  = (-1)
 ...
 ``` 
-Which clearly alternates between 0 and 1, and so is bounded. This means that `c = -1` is in the Mandelbrot Set, and `c = 1` is not.
+Which is clearly bounded. This means that `c = -1` is in the Mandelbrot Set, and `c = 1` is not.
 
 Although the most famous image of the Mandelbrot Set is the set with the iterated function as `f(z) = z^2 + c`, there is no reason why we cannot use different powers of `z`. 
 This project generates Mandelbrot Set fractals for the general iterative polynomial `f(z) = z^d + c`, for any real number `d ≥ 0`.
