@@ -3,7 +3,7 @@ This project draws Mandelbrot and Julia Sets of non-negative order.
 
 ## Mandelbrot Sets
 The Mandelbrot Set is a set of complex numbers `c` that, when iterated through the function `f(z) = z^2 + c`, remain bounded.
-Consider, `c = 1`:
+Consider `c = 1`:
 ```
 f(0) = 0^2 + 1 = 1
 f(1) = 1^2 + 1 = 2
